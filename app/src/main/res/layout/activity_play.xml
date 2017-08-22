@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/play_layout"
+    tools:context="com.ro0kiey.musicplayer.PlayActivity">
+
+    <com.ro0kiey.musicplayer.widget.AlbumView
+        android:id="@+id/album_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/iv_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/iv_needle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_needle"/>
+
+    </com.ro0kiey.musicplayer.widget.AlbumView>
+
+</LinearLayout>
