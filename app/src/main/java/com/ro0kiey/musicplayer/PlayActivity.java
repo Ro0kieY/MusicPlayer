@@ -1,17 +1,22 @@
 package com.ro0kiey.musicplayer;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
 import com.ro0kiey.musicplayer.listener.MusicChangedListener;
 import com.ro0kiey.musicplayer.model.Music;
 import com.ro0kiey.musicplayer.utils.DisplayUtil;
 import com.ro0kiey.musicplayer.utils.ImageUtil;
+import com.ro0kiey.musicplayer.utils.StatusBarUtil;
 import com.ro0kiey.musicplayer.widget.AlbumView;
 
 import java.util.ArrayList;
@@ -22,19 +27,29 @@ public class PlayActivity extends AppCompatActivity {
     private AlbumView mAlbumView;
     private List<Music> mMusicList = new ArrayList<>();
     private LinearLayout mLinearLayout;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-
         initMusicDatas();
+        initView();
 
+    }
+
+    private void initView() {
         mLinearLayout = (LinearLayout)findViewById(R.id.play_layout);
+        mToolbar = (Toolbar)findViewById(R.id.play_toolbar);
+        setSupportActionBar(mToolbar);
+
+        StatusBarUtil.makeStatusBarTransparent(this);
+
         mAlbumView = (AlbumView)findViewById(R.id.album_view);
         mAlbumView.setMusicDataList(mMusicList);
         mAlbumView.setMusicChangedListener(new MusicChangedListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onMusicChanged(int musicPicRes) {
                 Drawable drawable = getBluredBackground(musicPicRes);
@@ -52,7 +67,7 @@ public class PlayActivity extends AppCompatActivity {
         /*切割部分图片*/
         Bitmap cropBitmap = Bitmap.createBitmap(bitmap, cropBitmapWidthX, 0, cropBitmapWidth, bitmap.getHeight());
         /*模糊化*/
-        final Bitmap bluredBitmap = ImageUtil.fastblur(cropBitmap, 0.02f , 8);
+        final Bitmap bluredBitmap = ImageUtil.fastblur(cropBitmap, 0.02f , 3);
         Drawable bluredDrawable = new BitmapDrawable(getResources(), bluredBitmap);
         return bluredDrawable;
 

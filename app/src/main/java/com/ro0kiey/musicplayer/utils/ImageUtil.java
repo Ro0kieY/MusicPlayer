@@ -1,13 +1,8 @@
 package com.ro0kiey.musicplayer.utils;
 
-import android.annotation.TargetApi;
-import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.graphics.BitmapFactory;
 
 /**
  * Created by Ro0kieY on 2017/8/22.
@@ -16,6 +11,51 @@ import android.renderscript.ScriptIntrinsicBlur;
 public class ImageUtil {
 
     private ImageUtil() {
+    }
+
+    /**
+     * 从资源文件中解码采样后的Bitmap
+     * @param res
+     * @param resId
+     * @param requestWidth
+     * @param requestHeight
+     * @return
+     */
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int requestWidth, int requestHeight) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        //计算采样率
+        options.inSampleSize = calculateInSampleSize(options, requestWidth, requestHeight);
+
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    /**
+     * 计算采样率
+     * @param options
+     * @param requestWidth
+     * @param requestHeight
+     * @return
+     */
+    public static int calculateInSampleSize(BitmapFactory.Options options, int requestWidth, int requestHeight){
+        if (requestWidth == 0 || requestHeight == 0){
+            return 1;
+        }
+
+        int height = options.outHeight;
+        int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > requestHeight || width > requestWidth){
+            int halfWidth = width / 2;
+            int halfHeight = height / 2;
+            while ((halfWidth / inSampleSize) >= requestWidth && (halfHeight / inSampleSize) >= requestHeight){
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
     }
 
     /**
