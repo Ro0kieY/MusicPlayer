@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"/>
 
-        <ImageView
+        <com.ro0kiey.musicplayer.widget.RotateView
             android:id="@+id/iv_needle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

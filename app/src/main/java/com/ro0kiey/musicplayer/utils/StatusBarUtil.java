@@ -16,6 +16,10 @@ public class StatusBarUtil {
     private StatusBarUtil() {
     }
 
+    /**
+     * 透明状态栏
+     * @param activity
+     */
     public static void makeStatusBarTransparent(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();

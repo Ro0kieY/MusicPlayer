@@ -11,9 +11,6 @@ public class DisplayUtil {
     private DisplayUtil() {
     }
 
-    /*手柄起始角度*/
-    public static final float ROTATION_INIT_NEEDLE = -30;
-
     /*截图屏幕宽高*/
     private static final float BASE_SCREEN_WIDTH = (float) 1080.0;
     private static final float BASE_SCREEN_HEIGHT = (float) 1920.0;
