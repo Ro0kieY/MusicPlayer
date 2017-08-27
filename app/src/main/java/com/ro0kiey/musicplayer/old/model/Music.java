@@ -1,4 +1,4 @@
-package com.ro0kiey.musicplayer.model;
+package com.ro0kiey.musicplayer.old.model;
 
 /**
  * Created by Ro0kieY on 2017/8/22.

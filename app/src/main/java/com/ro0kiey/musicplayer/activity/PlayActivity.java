@@ -1,4 +1,4 @@
-package com.ro0kiey.musicplayer;
+package com.ro0kiey.musicplayer.activity;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
@@ -6,18 +6,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
-import com.ro0kiey.musicplayer.listener.MusicChangedListener;
-import com.ro0kiey.musicplayer.model.Music;
-import com.ro0kiey.musicplayer.utils.DisplayUtil;
-import com.ro0kiey.musicplayer.utils.ImageUtil;
+import com.ro0kiey.musicplayer.R;
+import com.ro0kiey.musicplayer.old.listener.MusicChangedListener;
+import com.ro0kiey.musicplayer.old.model.Music;
+import com.ro0kiey.musicplayer.old.utils.DisplayUtil;
+import com.ro0kiey.musicplayer.old.utils.ImageUtil;
 import com.ro0kiey.musicplayer.utils.StatusBarUtil;
-import com.ro0kiey.musicplayer.widget.AlbumView;
+import com.ro0kiey.musicplayer.old.widget.AlbumView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +51,8 @@ public class PlayActivity extends AppCompatActivity {
         mAlbumView.setMusicChangedListener(new MusicChangedListener() {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
-            public void onMusicChanged(int musicPicRes) {
-                Drawable drawable = getBluredBackground(musicPicRes);
+            public void onMusicChanged(Drawable drawable) {
+                //Drawable drawable = getBluredBackground(musicPicRes);
                 mLinearLayout.setBackground(drawable);
             }
         });

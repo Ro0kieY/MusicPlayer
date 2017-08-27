@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal">
 
-    <com.ro0kiey.musicplayer.widget.RotateView
+    <com.ro0kiey.musicplayer.old.widget.RotateView
         android:id="@+id/iv_album"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -1,4 +1,4 @@
-package com.ro0kiey.musicplayer.adapter;
+package com.ro0kiey.musicplayer.old.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -20,19 +20,19 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View albumView = mAlbumList.get(position);
+        View albumView = mAlbumList.get(position %  mAlbumList.size());
         container.addView(albumView);
         return albumView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView(mAlbumList.get(position));
+        container.removeView(mAlbumList.get(position % mAlbumList.size()));
     }
 
     @Override
     public int getCount() {
-        return mAlbumList.size();
+        return Integer.MAX_VALUE;
     }
 
     @Override

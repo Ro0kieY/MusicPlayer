@@ -7,11 +7,11 @@
     android:orientation="vertical"
     android:id="@+id/play_layout"
     android:fitsSystemWindows="true"
-    tools:context="com.ro0kiey.musicplayer.PlayActivity">
+    tools:context="com.ro0kiey.musicplayer.activity.PlayActivity">
 
     <include layout="@layout/layout_play_toolbar"/>
 
-    <com.ro0kiey.musicplayer.widget.AlbumView
+    <com.ro0kiey.musicplayer.old.widget.AlbumView
         android:id="@+id/album_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,12 +28,12 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"/>
 
-        <com.ro0kiey.musicplayer.widget.RotateView
+        <com.ro0kiey.musicplayer.old.widget.RotateView
             android:id="@+id/iv_needle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_needle"/>
 
-    </com.ro0kiey.musicplayer.widget.AlbumView>
+    </com.ro0kiey.musicplayer.old.widget.AlbumView>
 
 </LinearLayout>

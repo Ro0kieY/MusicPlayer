@@ -1,4 +1,4 @@
-package com.ro0kiey.musicplayer.widget;
+package com.ro0kiey.musicplayer.old.widget;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -7,11 +7,8 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-
-import com.ro0kiey.musicplayer.utils.DisplayUtil;
 
 /**
  * Created by Ro0kieY on 2017/8/24.

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- MagicaSakura -->
+    <color name="theme_color_primary">#ffce3d3e</color>
+    <color name="theme_color_primary_dark">#ffce3d3e</color>
+    <color name="theme_color_primary_trans">#ffa13b41</color>
+
 </resources>

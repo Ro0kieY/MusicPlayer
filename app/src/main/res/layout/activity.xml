@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.bilibili.magicasakura.widgets.TintToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color_primary"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        app:contentInsetStart="0.0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/toolbar_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/actionbar_menu"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/toolbar_net"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_centerInParent="true"
+                android:background="@drawable/actionbar_discover_normal"
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/toolbar_music"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_toLeftOf="@id/toolbar_net"
+                android:background="@drawable/actionbar_music_normal"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/toolbar_friends"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_toRightOf="@id/toolbar_net"
+                android:background="@drawable/actionbar_friends_normal"
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/toolbar_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/actionbar_search"
+                android:clickable="true"/>
+
+        </RelativeLayout>
+
+    </com.bilibili.magicasakura.widgets.TintToolbar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

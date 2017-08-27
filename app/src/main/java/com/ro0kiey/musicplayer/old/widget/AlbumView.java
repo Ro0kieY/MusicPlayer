@@ -1,6 +1,5 @@
-package com.ro0kiey.musicplayer.widget;
+package com.ro0kiey.musicplayer.old.widget;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,11 +17,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.ro0kiey.musicplayer.R;
-import com.ro0kiey.musicplayer.adapter.ViewPagerAdapter;
-import com.ro0kiey.musicplayer.listener.MusicChangedListener;
-import com.ro0kiey.musicplayer.model.Music;
-import com.ro0kiey.musicplayer.utils.DisplayUtil;
-import com.ro0kiey.musicplayer.utils.ImageUtil;
+import com.ro0kiey.musicplayer.old.adapter.ViewPagerAdapter;
+import com.ro0kiey.musicplayer.old.listener.MusicChangedListener;
+import com.ro0kiey.musicplayer.old.model.Music;
+import com.ro0kiey.musicplayer.old.utils.DisplayUtil;
+import com.ro0kiey.musicplayer.old.utils.ImageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,7 @@ public class AlbumView extends RelativeLayout {
     private int mAlbumStatus = ALBUM_IS_NOT_OFFSET;
     private boolean mAlbumChanged;
     private boolean firstTime = true;
+    private int lastPosition;
 
     private List<View> mAlbumList = new ArrayList<>();
     private List<Music> mMusicList = new ArrayList<>();
@@ -112,8 +112,8 @@ public class AlbumView extends RelativeLayout {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (firstTime){
                     RotateView aiv_album = (RotateView)mAlbumList.get(position).findViewById(R.id.iv_album);
-                    aiv_album.startNeedleAnim();
                     aiv_album.startAlbumAnim();
+                    mIvNeedle.startNeedleAnim();
                     firstTime = !firstTime;
                 }
                 //左滑
@@ -154,17 +154,22 @@ public class AlbumView extends RelativeLayout {
                 switch (state){
                     case ViewPager.SCROLL_STATE_IDLE:
                         Log.d(TAG, "onPageScrollStateChanged : IDLE ");
+                        if (lastPosition == currentPosition){
+                            if (currentPosition != 0 || currentPosition != mAlbumList.size() - 1){
+                                mIvNeedle.startNeedleAnim();
+                            }
+                        }
                         if (RotateView.mNeedleStatus == RotateView.NEEDLE_OFF && mAlbumChanged){
                             mIvNeedle.startNeedleAnim();
                             for (int i = Math.max(0, currentPosition - 1); i < currentPosition + 2; i++){
                                 if (i > mAlbumList.size() - 1 || i < 0){
                                     return;
                                 }
-                                RotateView aiv_album = (RotateView)mAlbumList.get(i).findViewById(R.id.iv_album);
+                                RotateView rv_album = (RotateView)mAlbumList.get(i).findViewById(R.id.iv_album);
                                 if (i == currentPosition){
-                                    aiv_album.startAlbumAnim();
+                                    rv_album.startAlbumAnim();
                                 } else {
-                                    aiv_album.endAlbumAnim();
+                                    rv_album.endAlbumAnim();
                                 }
                             }
                         }
@@ -174,19 +179,19 @@ public class AlbumView extends RelativeLayout {
                             mIvNeedle.startNeedleAnim();
                         }
                         if (musicChangedListener != null){
-                            musicChangedListener.onMusicChanged(mMusicList.get(currentPosition).getMusicPicRes());
+                            musicChangedListener.onMusicChanged(mAlbumList.get(currentPosition).findViewById(R.id.iv_album).getBackground());
                         }
                         break;
                     case ViewPager.SCROLL_STATE_DRAGGING:
                         Log.d(TAG, "onPageScrollStateChanged : DRAGGING ");
+                        lastPosition = currentPosition;
                         if (RotateView.mNeedleStatus == RotateView.NEEDLE_ON){
                             mIvNeedle.reverseNeedleAnim();
-                            cancelRotateAnimator(mAlbumList.get(currentPosition).findViewById(R.id.iv_album));
                         }
                         break;
                     case ViewPager.SCROLL_STATE_SETTLING:
                         Log.d(TAG, "onPageScrollStateChanged : SETTLING");
-
+                        mAlbumStatus = ALBUM_IS_NOT_OFFSET;
                         break;
                     default:
                         break;
@@ -297,13 +302,9 @@ public class AlbumView extends RelativeLayout {
 
     public void setMusicChangedListener(MusicChangedListener listener){
         this.musicChangedListener = listener;
-        musicChangedListener.onMusicChanged(mMusicList.get(0).getMusicPicRes());
-    }
-
-    private ObjectAnimator cancelRotateAnimator(View target){
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(target, "Rotation", 0, 0);
-        objectAnimator.setDuration(0);
-        return objectAnimator;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), mMusicList.get(0).getMusicPicRes());
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+        musicChangedListener.onMusicChanged(drawable);
     }
 
 }
